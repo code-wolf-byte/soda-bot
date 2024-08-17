@@ -5,6 +5,7 @@ from modules.public.api import public_blueprint
 from modules.points.api import points_blueprint
 from modules.utils.db import DBConnect
 from modules.users.user_reader import check_gForm_for_distinguished_members as check_gForm
+from modules.auth.api import auth_blueprint
 
 # Initialize CORS with explicit origins allowed
 CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:3000/"}})
@@ -18,6 +19,7 @@ check_gForm()
 
 app.register_blueprint(public_blueprint, url_prefix="/")
 app.register_blueprint(points_blueprint, url_prefix="/points-system")
+app.register_blueprint(auth_blueprint, url_prefix="/auth")
 
 if __name__ == "__main__":
     app.run(debug=True)
