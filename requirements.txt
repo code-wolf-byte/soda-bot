@@ -327,6 +327,12 @@ whatthepatch @ file:///opt/conda/conda-bld/whatthepatch_1661795988879/work
 widgetsnbextension @ file:///croot/widgetsnbextension_1710960037596/work
 wrapt @ file:///tmp/abs_c335821b-6e43-4504-9816-b1a52d3d3e1eel6uae8l/croots/recipe/wrapt_1657814400492/work
 wsproto==1.2.0
+yarl==1.9.3
+zipp==3.17.0
+python_dotenv
+google-auth
+google-api-python-client
+google_auth_oauthlib
 wurlitzer @ file:///tmp/build/80754af9/wurlitzer_1638354972036/work
 xarray @ file:///croot/xarray_1668776594578/work
 yapf @ file:///croot/yapf_1708964320665/work

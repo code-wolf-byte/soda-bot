@@ -22,52 +22,7 @@ class Config:
             self.DB_NAME = os.environ["DB_NAME"]
             self.DB_USER = os.environ["DB_USER"]
             self.DB_PASSWORD = os.environ["DB_PASSWORD"]
-
-            # Encryption Config
-            self.SSH_KEY = None
-            with open("ssh.ppk", "r") as file:
-                lines = file.readlines()
-                print(lines)
-                print(type(lines))
-                public_lines_index = next(
-                    i
-                    for i, line in enumerate(lines)
-                    if line.startswith("Public-Lines:")
-                )
-                private_lines_index = next(
-                    i
-                    for i, line in enumerate(lines)
-                    if line.startswith("Private-Lines:")
-                )
-
-                # Extract the number of lines for the public and private keys
-                public_lines_count = int(
-                    lines[public_lines_index].split(":")[1].strip()
-                )
-                private_lines_count = int(
-                    lines[private_lines_index].split(":")[1].strip()
-                )
-
-                # Extract the public key
-                public_key_data = "".join(
-                    lines[
-                        public_lines_index + 1 : public_lines_index
-                        + 1
-                        + public_lines_count
-                    ]
-                )
-                public_key_pem = f"-----BEGIN PUBLIC KEY-----\n{public_key_data.strip()}\n-----END PUBLIC KEY-----"
-
-                # Extract the private key
-                private_key_data = "".join(
-                    lines[
-                        private_lines_index + 1 : private_lines_index
-                        + 1
-                        + private_lines_count
-                    ]
-                )
-                private_key_pem = f"-----BEGIN RSA PRIVATE KEY-----\n{private_key_data.strip()}\n-----END RSA PRIVATE KEY-----"
-                self.SSH_KEY = (public_key_pem, private_key_pem)
+            
             # App Config
             self.PROD = os.environ["PROD"]
 
