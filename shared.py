@@ -13,12 +13,14 @@ from modules.utils.db import DBConnect, Base
 from modules.utils.TokenManager import TokenManager
 from modules.bot.discord_modules.bot import BotFork
 
+from modules.users.invite import ClubInvitationSender
 
-username = ''
-password = ''
+username = input("Enter your ASU ID:")
+password = input("Enter your ASU password:")
 
 config = Config()
 app = Flask ("SoDA internal API", static_folder=None, template_folder=None)
+
 
 # Initialize database connection
 db_connect = DBConnect('sqlite:///./user.db')  # Adjust the URL to your database
@@ -26,3 +28,4 @@ app = Flask("SoDA internal API", static_folder=None, template_folder=None)
 CORS(app)
 tokenManger = TokenManager()
 
+invite = ClubInvitationSender(username=username, password=password, invitation_url='https://asu.campuslabs.com/engage/actioncenter/organization/soda/roster/Roster/invite')

@@ -22,8 +22,6 @@ app.register_blueprint(points_blueprint, url_prefix="/points")
 app.register_blueprint(users_blueprint, url_prefix="/users")
 
 if __name__ == "__main__":
-    username = input("Enter your ASU ID:")
-    password = input("Enter your ASU password:")
     if config.PROD:
         app.run(debug=False, host="0.0.0.0", port=8080)
     else:
