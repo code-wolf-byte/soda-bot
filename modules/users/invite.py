@@ -25,6 +25,8 @@ class InvitationSender:
         options.add_argument('--headless')  # Headless mode
         options.add_argument('--no-sandbox')  # Bypass OS security model
         options.add_argument('--disable-dev-shm-usage')  # Overcome limited resource problems
+        options.add_argument('--disable-gpu')  # Disable GPU for headless mode
+        options.add_argument('--window-size=1280x1024')  # Set window size for better visibility
         options.add_argument('--user-data-dir={}/userdata'.format(os.getcwd()))  # Use user data if needed
         try:
             self.driver = webdriver.Chrome(options=options)  # Ensure ChromeDriver is in your PATH
@@ -52,11 +54,13 @@ class InvitationSender:
                 logging.info("Proceeding with login.")
 
             try:
+                self.drive.save_screenshot("screenshot1.png")
                 WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.ID, 'username')))
                 self.driver.find_element(By.ID, 'username').send_keys(self.username)
                 self.driver.find_element(By.ID, 'password').send_keys(self.password)
                 self.driver.find_element(By.NAME, 'submit').click()
                 logging.info("Login credentials submitted.")
+                self.driver.save_screenshot("screenshot2.png")
 
                 # # Handle Duo 2FA
                 # WebDriverWait(self.driver, 20).until(
@@ -68,15 +72,20 @@ class InvitationSender:
                 # logging.info(f'Duo 2FA push sent.')
 
                 # Confirm Duo 2FA push
+                
+                self.driver.save_screenshot("screenshot3.png")
                 self.driver.switch_to.default_content()
                 yes_button = WebDriverWait(self.driver, 60).until(
                     EC.element_to_be_clickable((By.XPATH, '//button[contains(text(), "Yes, this is my device")]')))
                 #debugging
                 print("yes_button")
+                self.driver.save_screenshot('screenshot4.png')
                 yes_button.click()
                 logging.info('Clicked "Yes, this is my device" button.')
+                self.driver.save_screenshot('screenshot5.png')
 
                 # Wait for email text box visibility
+                self.driver.save_screenshot('screenshot6.png')
                 WebDriverWait(self.driver, 60).until(
                     EC.visibility_of_element_located((By.XPATH, '//*[@id="GroupInviteByEmail"]')))
                 logging.info("Email text box is visible, login successful.")
