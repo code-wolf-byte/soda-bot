@@ -74,6 +74,8 @@ def create_user():
     user_asu_id = request.args.get('asu_id')
     user_academic_standing = request.args.get('academic_standing')
     user_major = request.args.get('major')
+    print(f"Email:{user_email}, Name:{user_email}" )
+    print(f"ASU ID:{user_asu_id}, Academic Standing:{user_academic_standing}, Major:{user_major}")
     try:
         db = next(db_connect.get_db())
         user = User(
