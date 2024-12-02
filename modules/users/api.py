@@ -73,13 +73,15 @@ def create_user():
     user_name = request.args.get('name')
     user_asu_id = request.args.get('asu_id')
     user_academic_standing = request.args.get('academic_standing')
+    user_major = request.args.get('major')
     try:
         db = next(db_connect.get_db())
         user = User(
             email=user_email,
             name=user_name,
             asu_id=user_asu_id,
-            academic_standing=user_academic_standing
+            academic_standing=user_academic_standing,
+            major= user_major
         )
         db.add(user)
         db.commit()
